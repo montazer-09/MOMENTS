@@ -37,7 +37,6 @@ import {
   Line,
   CartesianGrid
 } from 'recharts';
-import { GoogleGenAI, Type } from "@google/genai";
 import confetti from 'canvas-confetti';
 
 import { 
