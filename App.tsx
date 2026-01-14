@@ -55,8 +55,18 @@ import { getMoments, saveMoments, getSettings, saveSettings } from './services/s
 
 // --- Gemini AI Setup ---
 // Safe initialization for browser environment
-const API_KEY = process.env.API_KEY || '';
-const ai = new GoogleGenAI({ apiKey: API_KEY });
+const AI_ENDPOINT = "https://ai-worker.lyt740111.workers.dev/";
+
+async function askAI(message: string): Promise<string> {
+  const res = await fetch(AI_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message })
+  });
+
+  const data = await res.json();
+  return data?.candidates?.[0]?.content?.parts?.[0]?.text ?? "No reply";
+}
 
 // --- Utility Functions ---
 
